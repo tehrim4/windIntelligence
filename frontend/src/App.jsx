@@ -1,3 +1,4 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 import { useEffect, useState } from "react";
 import {
   Activity,
@@ -63,9 +64,10 @@ export default function App() {
   async function load() {
     SS("loading");
     SE("");
+
     try {
       const r = await fetch(
-        "/api/analysis?" + new URLSearchParams({ from, to }),
+        `${API_BASE_URL}/api/analysis?` + new URLSearchParams({ from, to }),
       );
       const b = await r.json();
       if (!r.ok) throw Error(b.detail || "Request failed");
